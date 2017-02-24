@@ -1,0 +1,57 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <include file="example.xml"/>
+    <!-- Configuration for the default package. -->
+    <package name="default" extends="struts-default">
+        
+        <action name="iniciarSesion" class="control.sesion.ControlLogin" method="iniciarSesion">
+            <result name="superusuario">/superusuario/menuSuperusuario.jsp</result>
+            <result name="ejecutivo" type="redirect">cargarDatosEjecutivo</result>
+            <result name="cliente" type="redirect">cargarDatosClientes</result>
+            <result name="error">/index.jsp</result>
+        </action>
+        
+        <action name="cerrarSesion" class="control.sesion.ControlLogin" method="cerrarSesion">
+            <result name="success">/index.jsp</result>
+        </action>  
+        
+        
+        <!--ACCIONES PARA CLIENTES-->
+        <action name="cargarDatosClientes" class="control.banco.ControlUsuario" method="cargarDatosCliente">
+            <result name="success">/cliente/menuCliente.jsp</result>
+        </action> 
+        <action name="mostrarCuentasCliente" class="control.banco.ControlUsuario" method="mostrarCuentasCliente">
+            <result name="success">/cliente/mostrarCuentas.jsp</result>
+        </action>  
+        <!--FINALIZAN ACCIONES PARA LOS CLIENTES-->
+        
+        <!--ACCIONES PARA EJECUTIVOS-->
+        <action name="cargarDatosEjecutivo" class="control.banco.ControlEjecutivo" method="cargarDatosEjecutivo">
+            <result name="success">/ejecutivo/menuEjecutivo.jsp</result>
+        </action> 
+        <action name="cargarTipos" class="control.banco.ControlEjecutivo" method="cargarTipos">
+            <result name="success">/ejecutivo/registrarCliente.jsp</result>
+        </action> 
+        <action name="registrarCliente" class="control.banco.ControlEjecutivo" method="registrarCliente">
+            <result name="success" type="redirect">cargarTipos</result>
+            <result name="error">/error/error.jsp</result>
+        </action> 
+        <action name="buscarCliente" class="control.banco.ControlEjecutivo" method="buscarCliente">
+            <result name="success">/ejecutivo/buscarCliente.jsp</result>
+            <result name="error">/error/error.jsp</result>
+        </action> 
+        <action name="cargarDatosCliente" class="control.banco.ControlEjecutivo" method="cargarDatosCliente">
+            <result name="success">/ejecutivo/modificarCliente.jsp</result>
+            <result name="error">/error/error.jsp</result>
+        </action>
+       <action name="modificarCliente" class="control.banco.ControlEjecutivo" method="modificarCliente">
+            <result name="success">/ejecutivo/modificarCliente.jsp</result>
+            <result name="error">/error/error.jsp</result>
+        </action>  
+        <!--TERMINAN ACCIONES PARA EJECUTIVOS-->
+        
+    </package>
+</struts>
