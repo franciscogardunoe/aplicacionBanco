@@ -14,7 +14,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Bancomer</title>
+        <title>BBVA Bancomer | Ejecutivo</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
@@ -54,7 +54,7 @@
             <!-- Logo -->
             <a href="<%=context%>/cargarDatosEjecutivo" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>A</b>LT</span>
+                <span class="logo-mini"><b>BBVA</b></span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg"><b>BBVA</b> Bancomer</span>
             </a>
@@ -147,7 +147,7 @@
                             <div id="mainContent" role="tabpanel" class="tab-pane active">
                                 <h1>Modificar datos del cliente</h1>
                                 <br>
-                                <form name="form1" action="<%=context%>/modificarCliente?idCliente=<s:property value="unCliente.idCliente"/>">
+                                <form name="form1" action="<%=context%>/modificarCliente">
                                     <font color="#0174DF"><h3>Datos personales</h3></font>
                                     <input name="unCliente.idCliente" hidden="" value="<s:property value="unCliente.idCliente"/>"/>
                                     <div class="form-group">
@@ -174,11 +174,40 @@
                                         <label for="nnc">Correo electrónico:</label>
                                         <input name="unCliente.usuario.correoElectronico" hidden="" class="form-control" value="<s:property value="UnCliente.usuario.correoElectronico"/>"/>
                                     </div>           
-                                    
+
                                     <div class="container">
                                         <input type="submit" value="Guardar cambios" class="btn btn-success">
                                     </div>              
-                                </form>                                                          
+                                </form> 
+                                <br>
+                                <font color="#0174DF"><h3>Cuentas bancarias</h3></font>                              
+                                <input name="unCliente.idCliente" hidden="" value="<s:property value="unCliente.idCliente"/>"/>
+                                <div class="container">
+                                    <a href="<%=context%>/prepararRegistroCuenta?unCliente.idCliente=<s:property value="unCliente.idCliente"/>" class="btn btn-info">Crear una nueva cuenta</a>                                                     
+                                </div>  
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo de cuenta</th>
+                                            <th>Saldo</th>
+                                            <th>Fecha de apertura</th>
+                                            <th>Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <s:iterator value="misCuentas" status="stet"> 
+                                            <tr>
+                                        <input name="idCuenta" type="hidden" value="<s:property value="idCuenta"/>"/>
+                                        <td><s:property value="tipoCuenta.nombre"/></td>
+                                        <td>$ <s:property value="saldo"/></td>
+                                        <td><s:property value="fechaCreacion"/></td>   
+                                        <div class="container">
+                                            <td> <a href="<%=context%>/eliminarCuentaCliente?idCuenta=<s:property value="idCuenta"/>&unCliente.idCliente=<s:property value="unCliente.idCliente"/>" class="btn btn-danger">Eliminar cuenta</a></td>                                                      
+                                        </div>        
+                                        </tr>
+                                    </s:iterator> 
+                                    </tbody>
+                                </table>                                              
                             </div>                          
                         </div>
                     </div>

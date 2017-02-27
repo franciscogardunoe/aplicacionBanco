@@ -1,6 +1,6 @@
 <%-- 
-    Document   : registrarCliente
-    Created on : 23/02/2017, 03:12:25 PM
+    Document   : registrarEjecutivo
+    Created on : 26/02/2017, 08:36:22 PM
     Author     : franc
 --%>
 
@@ -14,7 +14,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>BBVA Bancomer | Ejecutivo</title>
+        <title>BBVA Bancomer | SuperUsuario</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
@@ -52,11 +52,11 @@
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="<%=context%>/cargarDatosEjecutivo" class="logo">
+            <a href="<%=context%>/menuSuperusuario.jsp" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>BBVA</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>BBVA </b>Bancomer</span>
+                <span class="logo-lg"><b>BBVA</b> Bancomer</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -71,7 +71,7 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<%=context%>/img/iconoUsuario.png" class="user-image" alt="User Image">
-                                <span class="hidden-xs"><s:property value="UnEjecutivo.nombre"/></span>
+                                <span class="hidden-xs">Super administrador</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
@@ -79,8 +79,8 @@
                                     <img src="<%=context%>/img/iconoUsuario.png" class="img-circle" alt="User Image">
 
                                     <p>
-                                        <s:property value="UnEjecutivo.nombre"/> 
-                                        <small>Ejecutivo</small>
+                                        Super administrador
+                                        <small></small>
                                     </p>
                                 </li>
 
@@ -107,47 +107,40 @@
                     </div>
                     <div class="pull-left info">
                         <center><p>Hola :)</p></center>
-                        <p><s:property value="UnEjecutivo.nombre"/></p>        
+                        <p>Super administrador</p>
                     </div>
                 </div>
 
                 <!--COMIENZA EL MENÚ DE LA APLICACIÓN -->
                 <ul class="sidebar-menu">
-                    <li class="header"><center><strong>MENÚ PRINCIPAL</strong></center></li>               
+                    <li class="header"><strong><center>MENÚ PRINCIPAL</center></strong></li>                    
 
                     <li class="treeview">
                         <a href="#">
                             <i class="glyphicon glyphicon-user"></i> 
-                            <span>Clientes</span>
+                            <span>Ejecutivos</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<%=context%>/cargarTipos"><i class="glyphicon glyphicon-edit"></i> Registrar cliente </a></li>
-                            <li><a href="<%=context%>/ejecutivo/buscarCliente"><i class="glyphicon glyphicon-search"></i> Buscar cliente</a></li>
+                            <li><a href="<%=context%>/superusuario/registrarEjecutivo.jsp"><i class="glyphicon glyphicon-edit"></i> Registrar ejecutivo</a></li>
+                            <li><a href="<%=context%>/superusuario/buscarEjecutivo.jsp"><i class="glyphicon glyphicon-search"></i> Buscar ejecutivo</a></li>
                         </ul>
-                    </li>
-                </ul>
+                    </li>              
             </section>
         </aside>
 
         <div class="content-wrapper">
             <!-- CONTENEDOR DE COLORES -->
             <section class="content">
-                <!-- Small boxes (Stat box) -->
-                <div class="row">                                     
-                </div>
-
                 <div class="col-md-12 ">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
-
                             <!--inicia pestaña carteras-->
                             <div id="mainContent" role="tabpanel" class="tab-pane active">
-                                <h1>Registrar un cliente</h1>
-                                <br>
-                                <form name="form1" action="<%=context%>/registrarCliente">
+                                <h1>Registrar ejecutivo</h1>
+                                <form name="form1" action="<%=context%>/registrarEjecutivo">
                                     <font color="#0174DF"><h3>Datos personales</h3></font>
                                     <div class="form-group">
                                         <label for="nc">Nombre:</label>
@@ -162,8 +155,6 @@
                                         <br>
                                         <input name="unCliente.fechaNacimiento" required="" value="<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date())%>" id="fechaGasto" type="date" step="any" min="0" class="form-control" required=""/>
                                     </div>
-
-
                                     <div class="form-group">
                                         <label for="nc">Dirección:</label>
                                         <input name="unCliente.direccion" type="text" required="" class="form-control">
@@ -173,6 +164,18 @@
                                         <input name="unCliente.telefono" type="number" required="" class="form-control">
                                     </div>
                                     <div class="form-group">
+                                        <label for="nc">Sueldo:</label>
+                                        <input name="unCliente.sueldo" type="number" required="" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nc">Número de seguridad social:</label>
+                                        <input name="unCliente.nss" type="text" required="" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nc">RFC:</label>
+                                        <input name="unCliente.rfc" type="text" required="" class="form-control">
+                                    </div>                                   
+                                    <div class="form-group">
                                         <label for="nc">Correo electrónico:</label>
                                         <input name="unCliente.usuario.correoElectronico" type="email" required="" class="form-control">
                                     </div>
@@ -180,32 +183,26 @@
                                         <label for="nc">Contraseña:</label>
                                         <input name="unCliente.usuario.contrasena" type="password" required="" class="form-control">
                                     </div>
-                                    <br>
-                                    <font color="#0174DF"><h3>Datos de la cuenta Bancomer</h3></font>
-                                    <div class="form-group">
-                                        <label for="nc">Saldo de apertura:</label>
-                                        <input name="unCliente.cuenta.saldo" type="number" required="" class="form-control">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="nc">Tipo de cuenta Bancomer:</label> 
-                                        <select name="unCliente.tipo.idTipoCuenta" class="form-control" style="width: 100%">
-                                            <s:iterator value="misTipos">
-                                                <option value="<s:property value="idTipoCuenta"/>" class="form-control"> <s:property value="nombre"/></option>
-                                            </s:iterator>
-                                        </select>
-                                    </div>
+                                    <br>                                  
                                     <div class="container">
                                         <input type="reset" value="Cancelar" class="btn btn-danger"> 
                                         <input type="submit" value="Registrar" class="btn btn-success">
                                     </div>
                                 </form>
-                            </div>                          
+                            </div> 
+
                         </div>
                     </div>
                 </div>
+                <!--termina pestaña estadisticas-->
+
+                <!--TERMINAN PESTAÑAS DE DE FUNCIONES-->
+
             </section>
         </div>
+        <br>
+
+
 
 
         <!-- INFORMACIÓN DE PIE DE PÁGINA -->
@@ -213,7 +210,7 @@
             <div class="pull-right hidden-xs">
                 <b>Versión Beta</b> 1.0
             </div>
-            <strong>Copyright &copy; 2017 BBVA Bancomer S.A. de C.V</a>.</strong> Todos los derechos reservados
+            <strong>Copyright &copy; 2017 Bancomer</a>.</strong> Todos los derechos reservados
         </footer>
 
 

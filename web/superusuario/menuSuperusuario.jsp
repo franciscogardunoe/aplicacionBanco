@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Bancomer</title>
+        <title>BBVA Bancomer | SuperUsuario</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
@@ -50,7 +50,7 @@
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="<%=context%>/menuSuperusuario.jsp" class="logo">
+            <a href="<%=context%>/superusuario/menuSuperusuario.jsp" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>BBVA</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -112,11 +112,20 @@
                 <!--COMIENZA EL MENÚ DE LA APLICACIÓN -->
                 <ul class="sidebar-menu">
                     <li class="header"><strong><center>MENÚ PRINCIPAL</center></strong></li>                    
-                    <li class="presentation">
-                            <a href="<%=context%>/cargarDatosCliente">
-                                <i class="glyphicon glyphicon-user"></i> <span>Ejecutivos</span>
-                            </a>
-                    </li>                
+                    
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="glyphicon glyphicon-user"></i> 
+                            <span>Ejecutivos</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="<%=context%>/superusuario/registrarEjecutivo.jsp"><i class="glyphicon glyphicon-edit"></i> Registrar ejecutivo</a></li>
+                            <li><a href="<%=context%>/superusuario/buscarEjecutivo.jsp"><i class="glyphicon glyphicon-search"></i> Buscar ejecutivo</a></li>
+                        </ul>
+                    </li>              
             </section>
         </aside>
 
@@ -126,8 +135,12 @@
                 <div class="col-md-12 ">
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
+                            <!--inicia pestaña carteras-->
+                            <div id="mainContent" role="tabpanel" class="tab-pane active">
+                                <h1>Vista Superusuario</h1>
 
-                            
+                            </div> 
+
                         </div>
                     </div>
                 </div>
@@ -148,7 +161,6 @@
                 <b>Versión Beta</b> 1.0
             </div>
             <strong>Copyright &copy; 2017 Bancomer</a>.</strong> Todos los derechos reservados
-            reserved.
         </footer>
 
 

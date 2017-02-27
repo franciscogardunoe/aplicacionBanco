@@ -13,6 +13,7 @@ import java.util.Map;
 import model.cliente.beanCliente;
 import model.cliente.daoCliente;
 import model.cuenta.beanCuenta;
+import model.cuenta.daoCuenta;
 import model.ejecutivo.beanEjecutivo;
 import model.ejecutivo.daoEjecutivo;
 import model.tipoCuenta.beanTipoCuenta;
@@ -32,6 +33,8 @@ public class ControlEjecutivo {
     private List<beanCliente> misResultados;
     private String buscar;
     private int idCliente;
+    private List<beanCuenta> misCuentas;
+    private int idCuenta;
 
     public beanEjecutivo getUnEjecutivo() {
         return unEjecutivo;
@@ -89,6 +92,22 @@ public class ControlEjecutivo {
         this.idCliente = idCliente;
     }
 
+    public List<beanCuenta> getMisCuentas() {
+        return misCuentas;
+    }
+
+    public void setMisCuentas(List<beanCuenta> misCuentas) {
+        this.misCuentas = misCuentas;
+    }
+
+    public int getIdCuenta() {
+        return idCuenta;
+    }
+
+    public void setIdCuenta(int idCuenta) {
+        this.idCuenta = idCuenta;
+    }
+
     public String cargarDatosEjecutivo() {
         session = ActionContext.getContext().getSession();
         int idUsuario = Integer.parseInt(session.get("idUsuario").toString());
@@ -143,12 +162,18 @@ public class ControlEjecutivo {
     }
 
     public String cargarDatosCliente() {
+        session = ActionContext.getContext().getSession();
+        int idUsuario = Integer.parseInt(session.get("idUsuario").toString());
+        daoEjecutivo daoE = new daoEjecutivo();
+        setUnEjecutivo(daoE.consultarEjecutivo(idUsuario));
         daoCliente daoCl = new daoCliente();
+        daoCuenta daoC = new daoCuenta();
         setUnCliente(daoCl.consultarClienteModificar(getIdCliente()));
+        setMisCuentas(daoC.consultaCuentasCliente(getIdCliente()));
         return SUCCESS;
     }
-    
-    public String modificarCliente(){
+
+    public String modificarCliente() {
         beanCliente unCliente = new beanCliente();
         unCliente.setNombre(getUnCliente().getNombre());
         unCliente.setApellidos(getUnCliente().getApellidos());
@@ -157,10 +182,69 @@ public class ControlEjecutivo {
         unCliente.setTelefono(getUnCliente().getTelefono());
         beanUsuario unUsuario = new beanUsuario();
         unUsuario.setCorreoElectronico(getUnCliente().getUsuario().getCorreoElectronico());
-        unCliente.setUsuario(unUsuario);  
-        unCliente.setIdCliente(getIdCliente());
-        daoCliente daoC = new daoCliente();
-        if (daoC.modificarCliente(unCliente)) {
+        unCliente.setUsuario(unUsuario);
+        unCliente.setIdCliente(getUnCliente().getIdCliente());
+        System.out.println("El id cliente es: " + getUnCliente().getIdCliente());
+        daoCuenta daoC = new daoCuenta();
+        daoCliente daoCl = new daoCliente();
+        setMisCuentas(daoC.consultaCuentasCliente(getUnCliente().getIdCliente()));
+        session = ActionContext.getContext().getSession();
+        int idUsuario = Integer.parseInt(session.get("idUsuario").toString());
+        daoEjecutivo daoE = new daoEjecutivo();
+        setUnEjecutivo(daoE.consultarEjecutivo(idUsuario));
+        if (daoCl.modificarCliente(unCliente)) {
+            setUnCliente(daoCl.consultarClienteModificar(getUnCliente().getIdCliente()));
+            return SUCCESS;
+        } else {
+            return ERROR;
+        }
+    }
+
+    public String eliminarCuentaCliente() {
+        session = ActionContext.getContext().getSession();
+        int idUsuario = Integer.parseInt(session.get("idUsuario").toString());
+        daoEjecutivo daoE = new daoEjecutivo();
+        setUnEjecutivo(daoE.consultarEjecutivo(idUsuario));
+        daoCliente daoCl = new daoCliente();
+        daoCuenta daoC = new daoCuenta();
+        setUnCliente(daoCl.consultarClienteModificar(getUnCliente().getIdCliente()));
+        if (daoC.eliminarCuentaUsuario(getIdCuenta())) {
+            setMisCuentas(daoC.consultaCuentasCliente(getUnCliente().getIdCliente()));
+            return SUCCESS;
+        } else {
+            return ERROR;
+        }
+    }
+
+    public String prepararRegistroCuenta() {
+        daoTipoCuenta daoT = new daoTipoCuenta();
+        setMisTipos(daoT.consultarTiposCuentas());
+        session = ActionContext.getContext().getSession();
+        int idUsuario = Integer.parseInt(session.get("idUsuario").toString());
+        daoEjecutivo daoE = new daoEjecutivo();
+        setUnEjecutivo(daoE.consultarEjecutivo(idUsuario));
+        return SUCCESS;
+    }
+
+    public String registrarNuevaCuenta() {
+        beanCliente unCliente = new beanCliente();
+        unCliente.setIdCliente(getUnCliente().getIdCliente());
+        beanCuenta unaCuenta = new beanCuenta();
+        unaCuenta.setSaldo(getUnCliente().getCuenta().getSaldo());
+        unCliente.setCuenta(unaCuenta);
+        beanTipoCuenta unTipo = new beanTipoCuenta();
+        unTipo.setIdTipoCuenta(getUnCliente().getTipo().getIdTipoCuenta());
+        unCliente.setTipo(unTipo);
+        daoCuenta dao = new daoCuenta();
+        if (dao.registrarNuevaCuenta(unCliente)) {
+            session = ActionContext.getContext().getSession();
+            int idUsuario = Integer.parseInt(session.get("idUsuario").toString());
+            daoEjecutivo daoE = new daoEjecutivo();
+            setUnEjecutivo(daoE.consultarEjecutivo(idUsuario));
+            daoCliente daoCl = new daoCliente();
+            daoCuenta daoC = new daoCuenta();
+            setUnCliente(daoCl.consultarClienteModificar(getUnCliente().getIdCliente()));
+            setMisCuentas(daoC.consultaCuentasCliente(getUnCliente().getIdCliente()));
             return SUCCESS;
         } else {
             return ERROR;

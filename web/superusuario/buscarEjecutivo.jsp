@@ -1,6 +1,6 @@
 <%-- 
-    Document   : registrarCliente
-    Created on : 23/02/2017, 03:12:25 PM
+    Document   : buscarEjecutivo
+    Created on : 26/02/2017, 08:38:09 PM
     Author     : franc
 --%>
 
@@ -14,7 +14,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>BBVA Bancomer | Ejecutivo</title>
+        <title>BBVA Bancomer | SuperUsuario</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
@@ -52,7 +52,7 @@
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="<%=context%>/cargarDatosEjecutivo" class="logo">
+            <a href="<%=context%>/superusuario/menuSuperusuario.jsp" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>BBVA</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -80,7 +80,7 @@
 
                                     <p>
                                         <s:property value="UnEjecutivo.nombre"/> 
-                                        <small>Ejecutivo</small>
+                                        <small>Super administrador</small>
                                     </p>
                                 </li>
 
@@ -107,6 +107,7 @@
                     </div>
                     <div class="pull-left info">
                         <center><p>Hola :)</p></center>
+                        Super administrador
                         <p><s:property value="UnEjecutivo.nombre"/></p>        
                     </div>
                 </div>
@@ -118,14 +119,14 @@
                     <li class="treeview">
                         <a href="#">
                             <i class="glyphicon glyphicon-user"></i> 
-                            <span>Clientes</span>
+                            <span>Ejecutivos</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<%=context%>/cargarTipos"><i class="glyphicon glyphicon-edit"></i> Registrar cliente </a></li>
-                            <li><a href="<%=context%>/ejecutivo/buscarCliente"><i class="glyphicon glyphicon-search"></i> Buscar cliente</a></li>
+                            <li><a href="<%=context%>/superusuario/registrarEjecutivo.jsp"><i class="glyphicon glyphicon-edit"></i> Registrar ejecutivo </a></li>
+                            <li><a href="<%=context%>/superusuario/buscarEjecutivo.jsp"><i class="glyphicon glyphicon-search"></i> Buscar ejecutivo</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -145,61 +146,47 @@
 
                             <!--inicia pestaña carteras-->
                             <div id="mainContent" role="tabpanel" class="tab-pane active">
-                                <h1>Registrar un cliente</h1>
+                                <h1>Buscar ejecutivo</h1>
                                 <br>
-                                <form name="form1" action="<%=context%>/registrarCliente">
-                                    <font color="#0174DF"><h3>Datos personales</h3></font>
+                                <form name="form1" action="<%=context%>/buscarEjecutivo">
                                     <div class="form-group">
-                                        <label for="nc">Nombre:</label>
-                                        <input name="unCliente.nombre" type="text" required="" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nc">Apellidos:</label>
-                                        <input name="unCliente.apellidos" type="text" required="" class="form-control">
-                                    </div>                         
-                                    <div class="form-group">
-                                        <label for="message-text" class="form-control-label">Fecha de nacimiento</label>
-                                        <br>
-                                        <input name="unCliente.fechaNacimiento" required="" value="<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date())%>" id="fechaGasto" type="date" step="any" min="0" class="form-control" required=""/>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="nc">Dirección:</label>
-                                        <input name="unCliente.direccion" type="text" required="" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nc">Teléfono:</label>
-                                        <input name="unCliente.telefono" type="number" required="" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nc">Correo electrónico:</label>
-                                        <input name="unCliente.usuario.correoElectronico" type="email" required="" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nc">Contraseña:</label>
-                                        <input name="unCliente.usuario.contrasena" type="password" required="" class="form-control">
-                                    </div>
-                                    <br>
-                                    <font color="#0174DF"><h3>Datos de la cuenta Bancomer</h3></font>
-                                    <div class="form-group">
-                                        <label for="nc">Saldo de apertura:</label>
-                                        <input name="unCliente.cuenta.saldo" type="number" required="" class="form-control">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="nc">Tipo de cuenta Bancomer:</label> 
-                                        <select name="unCliente.tipo.idTipoCuenta" class="form-control" style="width: 100%">
-                                            <s:iterator value="misTipos">
-                                                <option value="<s:property value="idTipoCuenta"/>" class="form-control"> <s:property value="nombre"/></option>
-                                            </s:iterator>
-                                        </select>
+                                        <label for="nc">Buscar:</label>
+                                        <input name="buscar" required="" type="text" class="form-control">
                                     </div>
                                     <div class="container">
-                                        <input type="reset" value="Cancelar" class="btn btn-danger"> 
-                                        <input type="submit" value="Registrar" class="btn btn-success">
+                                        <input type="submit" value="Buscar" class="btn btn-success">
                                     </div>
                                 </form>
+
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Apellidos</th>
+                                            <th>Fecha de nacimiento</th>
+                                            <th>Correo electrónico</th>
+                                            <th>Modificar</th>
+                                            <th>Eliminar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <s:iterator value="misResultados" status="stet"> 
+                                            <tr>
+                                        <input name="idEjecutivo" type="hidden" value="<s:property value="idEjecutivo"/>"/>
+                                        <td><s:property value="nombre"/></td>
+                                        <td><s:property value="apellidos"/></td>
+                                        <td><s:property value="fechaNacimiento"/></td>
+                                        <td><s:property value="usuario.correoElectronico"/></td>
+                                        <div class="container">
+                                            <td> <a href="<%=context%>/consultarEjecutivoModificar?idEjecutivo=<s:property value="idEjecutivo"/>" class="btn btn-warning">Modificar</a></td>                                                      
+                                        </div>  
+                                        <div class="container">
+                                            <td> <a href="<%=context%>/eliminarEjecutivo?idEjecutivo=<s:property value="idEjecutivo"/>" class="btn btn-danger">Eliminar</a></td>                                                      
+                                        </div> 
+                                        </tr>
+                                    </s:iterator> 
+                                    </tbody>
+                                </table>           
                             </div>                          
                         </div>
                     </div>
@@ -260,5 +247,3 @@
     <script src="<%=context%>/AdminLTE-master/dist/js/demo.js"></script>
 </body>
 </html>
-
-

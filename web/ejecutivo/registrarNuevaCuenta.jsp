@@ -1,6 +1,6 @@
 <%-- 
-    Document   : registrarCliente
-    Created on : 23/02/2017, 03:12:25 PM
+    Document   : registrarNuevaCuenta
+    Created on : 26/02/2017, 07:18:36 PM
     Author     : franc
 --%>
 
@@ -145,48 +145,15 @@
 
                             <!--inicia pestaña carteras-->
                             <div id="mainContent" role="tabpanel" class="tab-pane active">
-                                <h1>Registrar un cliente</h1>
+                                <h1>Registrar un nueva cuenta</h1>
                                 <br>
-                                <form name="form1" action="<%=context%>/registrarCliente">
-                                    <font color="#0174DF"><h3>Datos personales</h3></font>
-                                    <div class="form-group">
-                                        <label for="nc">Nombre:</label>
-                                        <input name="unCliente.nombre" type="text" required="" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nc">Apellidos:</label>
-                                        <input name="unCliente.apellidos" type="text" required="" class="form-control">
-                                    </div>                         
-                                    <div class="form-group">
-                                        <label for="message-text" class="form-control-label">Fecha de nacimiento</label>
-                                        <br>
-                                        <input name="unCliente.fechaNacimiento" required="" value="<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date())%>" id="fechaGasto" type="date" step="any" min="0" class="form-control" required=""/>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="nc">Dirección:</label>
-                                        <input name="unCliente.direccion" type="text" required="" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nc">Teléfono:</label>
-                                        <input name="unCliente.telefono" type="number" required="" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nc">Correo electrónico:</label>
-                                        <input name="unCliente.usuario.correoElectronico" type="email" required="" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nc">Contraseña:</label>
-                                        <input name="unCliente.usuario.contrasena" type="password" required="" class="form-control">
-                                    </div>
-                                    <br>
+                                <form name="form1" action="<%=context%>/registrarNuevaCuenta"> 
+                                    <input name="unCliente.idCliente" hidden="" value="<s:property value="unCliente.idCliente"/>"/>
                                     <font color="#0174DF"><h3>Datos de la cuenta Bancomer</h3></font>
                                     <div class="form-group">
                                         <label for="nc">Saldo de apertura:</label>
                                         <input name="unCliente.cuenta.saldo" type="number" required="" class="form-control">
                                     </div>
-
                                     <div class="form-group">
                                         <label for="nc">Tipo de cuenta Bancomer:</label> 
                                         <select name="unCliente.tipo.idTipoCuenta" class="form-control" style="width: 100%">

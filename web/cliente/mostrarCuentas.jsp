@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Bancomer</title>
+        <title>BBVA Bancomer | Cliente</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
@@ -50,7 +50,7 @@
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="<%=context%>/cargarDatosCliente" class="logo">
+            <a href="<%=context%>/cargarDatosClientes" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>BBVA</b></span>
                 <!-- logo for regular state and mobile devices -->
@@ -111,9 +111,9 @@
 
                 <!--COMIENZA EL MENÚ DE LA APLICACIÓN -->
                 <ul class="sidebar-menu">
-                    <li class="header">MENÚ PRINCIPAL</li>                    
+                    <li class="header"><strong><center>MENÚ PRINCIPAL</center></strong></li>                    
                     <li class="presentation">
-                        <a href="<%=context%>/cargarDatosCliente">
+                        <a href="<%=context%>/cargarDatosClientes">
                             <i class="glyphicon glyphicon-user"></i> <span>Mis datos personales</span>
                         </a>
                     </li>
@@ -215,7 +215,6 @@
                 <b>Versión Beta</b> 1.0
             </div>
            <strong>Copyright &copy; 2017 BBVA Bancomer S.A. de C.V.</a>.</strong> Todos los derechos reservados
-            reserved.
         </footer>
 
 

@@ -28,6 +28,9 @@
         </action>  
         <!--FINALIZAN ACCIONES PARA LOS CLIENTES-->
         
+        
+        
+        
         <!--ACCIONES PARA EJECUTIVOS-->
         <action name="cargarDatosEjecutivo" class="control.banco.ControlEjecutivo" method="cargarDatosEjecutivo">
             <result name="success">/ejecutivo/menuEjecutivo.jsp</result>
@@ -48,10 +51,47 @@
             <result name="error">/error/error.jsp</result>
         </action>
        <action name="modificarCliente" class="control.banco.ControlEjecutivo" method="modificarCliente">
-            <result name="success">/ejecutivo/modificarCliente.jsp</result>
+            <result name="success">ejecutivo/modificarCliente.jsp</result>
+            <result name="error">/error/error.jsp</result>
+        </action>  
+        <action name="eliminarCuentaCliente" class="control.banco.ControlEjecutivo" method="eliminarCuentaCliente">
+            <result name="success">ejecutivo/modificarCliente.jsp</result>
+            <result name="error">/error/error.jsp</result>
+        </action>  
+        <action name="prepararRegistroCuenta" class="control.banco.ControlEjecutivo" method="prepararRegistroCuenta">
+            <result name="success">ejecutivo/registrarNuevaCuenta.jsp</result>
+            <result name="error">/error/error.jsp</result>
+        </action>  
+        <action name="registrarNuevaCuenta" class="control.banco.ControlEjecutivo" method="registrarNuevaCuenta">
+            <result name="success">ejecutivo/modificarCliente.jsp</result>
             <result name="error">/error/error.jsp</result>
         </action>  
         <!--TERMINAN ACCIONES PARA EJECUTIVOS-->
         
+        
+        
+        
+        <!--ACCIONES PARA SUPERADMINISTRADOR-->
+        <action name="registrarEjecutivo" class="control.banco.ControlSuper" method="registrarEjecutivo">
+            <result name="success">superusuario/registrarEjecutivo.jsp</result>
+            <result name="error">/error/error.jsp</result>
+        </action>  
+        <action name="buscarEjecutivo" class="control.banco.ControlSuper" method="buscarEjecutivo">
+            <result name="success">superusuario/buscarEjecutivo.jsp</result>
+            <result name="error">/error/error.jsp</result>
+        </action>
+        <action name="consultarEjecutivoModificar" class="control.banco.ControlSuper" method="consultarEjecutivoModificar">
+            <result name="success">superusuario/modificarEjecutivo.jsp</result>
+            <result name="error">/error/error.jsp</result>
+        </action>
+        <action name="modificarEjecutivo" class="control.banco.ControlSuper" method="modificarEjecutivo">
+            <result name="success">superusuario/modificarEjecutivo.jsp</result>
+            <result name="error">/error/error.jsp</result>
+        </action>
+        <action name="eliminarEjecutivo" class="control.banco.ControlSuper" method="eliminarEjecutivo">
+            <result name="success">superusuario/menuSuperusuario.jsp</result>
+            <result name="error">/error/error.jsp</result>
+        </action>
+        <!--FINALIZAN ACCIONES PARA SUPERADMINISTRADOR-->
     </package>
 </struts>
