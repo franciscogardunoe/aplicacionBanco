@@ -19,6 +19,7 @@ import model.ejecutivo.daoEjecutivo;
 import model.tipoCuenta.beanTipoCuenta;
 import model.tipoCuenta.daoTipoCuenta;
 import model.usuario.beanUsuario;
+import model.usuario.daoUsuario;
 
 /**
  *
@@ -35,6 +36,8 @@ public class ControlEjecutivo {
     private int idCliente;
     private List<beanCuenta> misCuentas;
     private int idCuenta;
+    private String correo;
+    private String comprobarusuario;
 
     public beanEjecutivo getUnEjecutivo() {
         return unEjecutivo;
@@ -106,6 +109,22 @@ public class ControlEjecutivo {
 
     public void setIdCuenta(int idCuenta) {
         this.idCuenta = idCuenta;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getComprobarusuario() {
+        return comprobarusuario;
+    }
+
+    public void setComprobarusuario(String comprobarusuario) {
+        this.comprobarusuario = correo;
     }
 
     public String cargarDatosEjecutivo() {
@@ -249,5 +268,20 @@ public class ControlEjecutivo {
         } else {
             return ERROR;
         }
+    }
+
+    public String comprobarCorreo() {
+        setCorreo(getCorreo());
+        daoUsuario daoU = new daoUsuario();
+        if (daoU.consultarCorreo(getCorreo())) {
+            System.out.println("Correo no disponible");
+            setComprobarusuario("Usuario no disponible");
+            return ERROR;
+        } else {
+            System.out.println("Correo disponible");
+            setComprobarusuario("Correo disponible");
+            return SUCCESS;
+        }
+
     }
 }

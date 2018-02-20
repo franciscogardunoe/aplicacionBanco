@@ -15,6 +15,76 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>BBVA Bancomer | SuperUsuario</title>
+        <script type="text/javascript">
+            function validarFormularioCliente() {
+                var nombre = document.getElementById('nombre').value;
+                var apellidos = document.getElementById('apellidos').value;
+                var direccion = document.getElementById('direccion').value;
+                var telefono = document.getElementById('telefono').value;
+                var contrasena = document.getElementById('contrasena').value;
+                var nss = document.getElementById('nss').value;
+                var rfc = document.getElementById('rfc').value;
+                var sueldo = docuement.getElementById('sueldo');
+
+                if (nombre.length <= 45 && nombre.length >= 3) {
+                    
+                } else {
+                    alert("El campo Nombre debe contener de 3 a 45 carácteres");
+                    return false;
+                }
+                if (apellidos.length <= 60 && apellidos.length >= 3) {
+                    
+                } else {
+                    alert("El campo Apellidos debe contener de 3 a 60 carácteres");
+                    return false;
+                }
+
+                if (!isNaN(telefono) && telefono.length === 10) {
+                    
+                } else {
+                    alert("El campo teléfono debe contener únicamente 10 números");
+                    return false;
+                }
+
+                if (direccion.length <= 200) {
+                    
+                } else {
+                    alert("El campo Dirección no admite más de 200 carácteres");
+                    return false;
+                }
+
+                if (contrasena.length <= 22 && contrasena.length >= 8) {
+                    
+                } else {
+                    alert("La contraseña debe contener de 8 a 22 carácteres");
+                    return false;
+                }
+
+                if (!isNaN(sueldo) && sueldo > 0) {
+                   
+                } else if (sueldo <= 0) {
+                    alert("El saldo debe ser númerico y mayor a $0 pesos");
+                    return false;
+                }
+                
+                if(nss.length === 11){
+                    
+                }else{
+                    alert("El Número de Seguridad Social debe ser de 11 dígitos");
+                    return false;
+                }
+                
+                if(rfc.length===12 || rfc.length===13){
+                    
+                }else{
+                    alert("El RFC debe contener 13 dígitos para personas físicas y 12 dígitos para personas morales ");
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        </script>
+
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
@@ -140,15 +210,15 @@
                             <!--inicia pestaña carteras-->
                             <div id="mainContent" role="tabpanel" class="tab-pane active">
                                 <h1>Registrar ejecutivo</h1>
-                                <form name="form1" action="<%=context%>/registrarEjecutivo">
+                                <form name="form1" action="<%=context%>/registrarEjecutivo" onsubmit="return validarFormularioCliente()" method="post">
                                     <font color="#0174DF"><h3>Datos personales</h3></font>
                                     <div class="form-group">
                                         <label for="nc">Nombre:</label>
-                                        <input name="unCliente.nombre" type="text" required="" class="form-control">
+                                        <input name="unCliente.nombre" type="text" required="" id="nombre" pattern="[a-z] [A-Z]" title="Introduzca únicamente letras" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">Apellidos:</label>
-                                        <input name="unCliente.apellidos" type="text" required="" class="form-control">
+                                        <input name="unCliente.apellidos" type="text" required="" id="apellidos" pattern="[a-z] [A-Z]" title="Introduzca únicamente letras" class="form-control">
                                     </div>                         
                                     <div class="form-group">
                                         <label for="message-text" class="form-control-label">Fecha de nacimiento</label>
@@ -157,23 +227,23 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">Dirección:</label>
-                                        <input name="unCliente.direccion" type="text" required="" class="form-control">
+                                        <input name="unCliente.direccion" type="text" required="" id="direccion" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">Teléfono:</label>
-                                        <input name="unCliente.telefono" type="number" required="" class="form-control">
+                                        <input name="unCliente.telefono" type="number" id="telefono" pattern="[0-9]" title="Introduzca únicamente números" required="" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">Sueldo:</label>
-                                        <input name="unCliente.sueldo" type="number" required="" class="form-control">
+                                        <input name="unCliente.sueldo" type="number" id="sueldo"  required="" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">Número de seguridad social:</label>
-                                        <input name="unCliente.nss" type="text" required="" class="form-control">
+                                        <input name="unCliente.nss" type="text" required="" id="nss" pattern="[0-9]" title="Introduzca únicamente 11 números" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">RFC:</label>
-                                        <input name="unCliente.rfc" type="text" required="" class="form-control">
+                                        <input name="unCliente.rfc" type="text" required="" id="rfc" class="form-control">
                                     </div>                                   
                                     <div class="form-group">
                                         <label for="nc">Correo electrónico:</label>
@@ -181,7 +251,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">Contraseña:</label>
-                                        <input name="unCliente.usuario.contrasena" type="password" required="" class="form-control">
+                                        <input name="unCliente.usuario.contrasena" type="password" id="contrasena" required="" class="form-control">
                                     </div>
                                     <br>                                  
                                     <div class="container">
@@ -224,7 +294,7 @@
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button);
+            $.widget.bridge('uibutton', $.ui.button);
     </script>
     <!-- Bootstrap 3.3.6 -->
     <script src="<%=context%>/AdminLTE-master/bootstrap/js/bootstrap.min.js"></script>

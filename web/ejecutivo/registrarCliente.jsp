@@ -15,6 +15,70 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>BBVA Bancomer | Ejecutivo</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js"></script>
+
+        <script type="text/javascript">
+            function validarFormularioCliente() {
+                var nombre = document.getElementById('nombre').value;
+                var apellidos = document.getElementById('apellidos').value;
+                var direccion = document.getElementById('direccion').value;
+                var telefono = document.getElementById('telefono').value;
+                var contrasena = document.getElementById('contrasena').value;
+                var sueldo = document.getElementById('saldo').value;
+                if (nombre.length <= 45 && nombre.length >= 3) {
+
+                } else {
+                    alert("El campo Nombre debe contener de 3 a 45 carácteres");
+                    return false;
+                }
+
+                if (apellidos.length <= 60 && apellidos.length >= 3) {
+
+                } else {
+                    alert("El campo Apellidos debe contener de 3 a 60 carácteres");
+                    return false;
+                }
+
+                if (!isNaN(telefono) && telefono.length === 10) {
+
+                } else {
+                    alert("El campo teléfono debe contener únicamente 10 números");
+                    return false;
+                }
+
+                if (direccion.length <= 200) {
+
+                } else {
+                    alert("El campo Dirección no admite más de 200 carácteres");
+                    return false;
+                }
+
+                if (contrasena.length <= 22 && contrasena.length >= 8) {
+
+                } else {
+                    alert("La contraseña debe contener de 8 a 22 carácteres");
+                    return false;
+                }
+
+                if (!isNaN(sueldo) && sueldo > 0) {
+
+                } else if (sueldo <= 0) {
+                    alert("El saldo debe ser númerico y mayor a $0 pesos");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            function validarCorreo() {
+                var url = '<%=context%>/comprobarCorreo';
+                var correo = 'correo=' + document.getElementById('correo').value;
+                var exe = new Ajax.Updater('comprobarusuario', url, {method: 'get', parameters: correo});
+            }
+        </script>
+
+
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
@@ -147,44 +211,43 @@
                             <div id="mainContent" role="tabpanel" class="tab-pane active">
                                 <h1>Registrar un cliente</h1>
                                 <br>
-                                <form name="form1" action="<%=context%>/registrarCliente">
+                                <form name="formulario" action="<%=context%>/registrarCliente" onsubmit="return validarFormularioCliente()" method="post">
                                     <font color="#0174DF"><h3>Datos personales</h3></font>
                                     <div class="form-group">
                                         <label for="nc">Nombre:</label>
-                                        <input name="unCliente.nombre" type="text" required="" class="form-control">
+                                        <input name="unCliente.nombre" type="text" required="" id="nombre" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">Apellidos:</label>
-                                        <input name="unCliente.apellidos" type="text" required="" class="form-control">
+                                        <input name="unCliente.apellidos" type="text" required="" id="apellidos" class="form-control">
                                     </div>                         
                                     <div class="form-group">
                                         <label for="message-text" class="form-control-label">Fecha de nacimiento</label>
                                         <br>
                                         <input name="unCliente.fechaNacimiento" required="" value="<%=new SimpleDateFormat("yyyy-MM-dd").format(new Date())%>" id="fechaGasto" type="date" step="any" min="0" class="form-control" required=""/>
                                     </div>
-
-
                                     <div class="form-group">
                                         <label for="nc">Dirección:</label>
-                                        <input name="unCliente.direccion" type="text" required="" class="form-control">
+                                        <input name="unCliente.direccion" type="text" required="" id="direccion" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">Teléfono:</label>
-                                        <input name="unCliente.telefono" type="number" required="" class="form-control">
+                                        <input name="unCliente.telefono" type="text" required="" id="telefono" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">Correo electrónico:</label>
-                                        <input name="unCliente.usuario.correoElectronico" type="email" required="" class="form-control">
+                                        <input name="unCliente.usuario.correoElectronico" id="correo" type="email" required="" onblur="return validarCorreo()" class="form-control">
+                                        <span id="comprobarusuario"><s:property value="comprobarusuario"/></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">Contraseña:</label>
-                                        <input name="unCliente.usuario.contrasena" type="password" required="" class="form-control">
+                                        <input name="unCliente.usuario.contrasena" type="password" id="contrasena" required="" class="form-control">
                                     </div>
                                     <br>
                                     <font color="#0174DF"><h3>Datos de la cuenta Bancomer</h3></font>
                                     <div class="form-group">
                                         <label for="nc">Saldo de apertura:</label>
-                                        <input name="unCliente.cuenta.saldo" type="number" required="" class="form-control">
+                                        <input name="unCliente.cuenta.saldo" type="number" id="saldo" required="" class="form-control">
                                     </div>
 
                                     <div class="form-group">
@@ -227,7 +290,7 @@
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button);
+                                            $.widget.bridge('uibutton', $.ui.button);
     </script>
     <!-- Bootstrap 3.3.6 -->
     <script src="<%=context%>/AdminLTE-master/bootstrap/js/bootstrap.min.js"></script>
@@ -257,7 +320,6 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="<%=context%>/AdminLTE-master/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="<%=context%>/AdminLTE-master/dist/js/demo.js"></script>
 </body>
 </html>
 

@@ -15,6 +15,68 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>BBVA Bancomer | SuperUsuario</title>
+        <script type="text/javascript">
+            function validarFormularioCliente() {
+                var nombre = document.getElementById('nombre').value;
+                var apellidos = document.getElementById('apellidos').value;
+                var direccion = document.getElementById('direccion').value;
+                var telefono = document.getElementById('telefono').value;
+                var nss = document.getElementById('nss').value;
+                var rfc = document.getElementById('rfc').value;
+                var sueldo = docuement.getElementById('sueldo');
+
+                if (nombre.length <= 45 && nombre.length >= 3) {
+                    
+                } else {
+                    alert("El campo Nombre debe contener de 3 a 45 carácteres");
+                    return false;
+                }
+                if (apellidos.length <= 60 && apellidos.length >= 3) {
+                    
+                } else {
+                    alert("El campo Apellidos debe contener de 3 a 60 carácteres");
+                    return false;
+                }
+
+                if (!isNaN(telefono) && telefono.length === 10) {
+                    
+                } else {
+                    alert("El campo teléfono debe contener únicamente 10 números");
+                    return false;
+                }
+
+                if (direccion.length <= 200) {
+                   
+                } else {
+                    alert("El campo Dirección no admite más de 200 carácteres");
+                    return false;
+                }
+
+                if (!isNaN(sueldo) && sueldo > 0) {
+                    
+                } else if (sueldo <= 0) {
+                    alert("El saldo debe ser númerico y mayor a $0 pesos");
+                    return false;
+                }
+                
+                if(nss.length === 11){
+                    
+                }else{
+                    alert("El Número de Seguridad Social debe ser de 11 dígitos");
+                    return false;
+                }
+                
+                if(rfc.length===12 || rfc.length===13){
+                    
+                }else{
+                    alert("El RFC debe contener 13 dígitos para personas físicas y 12 dígitos para personas morales ");
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        </script>
+        
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
@@ -148,16 +210,16 @@
                             <div id="mainContent" role="tabpanel" class="tab-pane active">
                                 <h1>Modificar datos del ejecutivo</h1>
                                 <br>
-                                <form name="form1" action="<%=context%>/modificarEjecutivo">
+                                <form name="form1" action="<%=context%>/modificarEjecutivo" onsubmit="return validarFormularioCliente()" method="post">
                                     <font color="#0174DF"><h3>Datos personales</h3></font>
                                     <input name="unCliente.idEjecutivo" hidden="" value="<s:property value="unCliente.idEjecutivo"/>"/>
                                     <div class="form-group">
                                         <label for="ic">Nombre:</label>
-                                        <input name="unCliente.nombre" hidden="" class="form-control" value="<s:property value="UnCliente.nombre"/>"/>
+                                        <input name="unCliente.nombre" hidden="" id="nombre" pattern="[a-z] [A-Z]" title="Introduzca únicamente letras" class="form-control" value="<s:property value="UnCliente.nombre"/>"/>
                                     </div>  
                                     <div class="form-group">
                                         <label for="nc">Apellidos:</label>
-                                        <input name="unCliente.apellidos" hidden="" class="form-control" value="<s:property value="UnCliente.apellidos"/>"/>
+                                        <input name="unCliente.apellidos" hidden="" id="apellidos" pattern="[a-z] [A-Z]" title="Introduzca únicamente letras" class="form-control" value="<s:property value="UnCliente.apellidos"/>"/>
                                     </div>  
                                     <div class="form-group">
                                         <label for="nnc">Fecha de nacimiento:</label>
@@ -165,23 +227,23 @@
                                     </div>     
                                     <div class="form-group">
                                         <label for="nnc">Dirección:</label>
-                                        <input name="unCliente.direccion" hidden="" class="form-control" value="<s:property value="UnCliente.direccion"/>"/>
+                                        <input name="unCliente.direccion" hidden="" id="direccion" class="form-control" value="<s:property value="UnCliente.direccion"/>"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="nnc">Teléfono:</label>
-                                        <input name="unCliente.telefono" hidden="" class="form-control" value="<s:property value="UnCliente.telefono"/>"/>
+                                        <input name="unCliente.telefono" hidden="" id="telefono" pattern="[0-9]" title="Introduzca únicamente números" class="form-control" value="<s:property value="UnCliente.telefono"/>"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">Sueldo:</label>
-                                        <input name="unCliente.sueldo" type="number" required="" class="form-control" value="<s:property value="UnCliente.sueldo"/>">
+                                        <input name="unCliente.sueldo" type="number" id="sueldo" required="" class="form-control" value="<s:property value="UnCliente.sueldo"/>">
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">Número de seguridad social:</label>
-                                        <input name="unCliente.nss" type="text" required="" value="<s:property value="UnCliente.nss"/>" class="form-control">
+                                        <input name="unCliente.nss" type="text" required="" id="nss" pattern="[0-9]" title="Introduzca únicamente números" value="<s:property value="UnCliente.nss"/>" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">RFC:</label>
-                                        <input name="unCliente.rfc" type="text" required="" class="form-control" value="<s:property value="UnCliente.rfc"/>">
+                                        <input name="unCliente.rfc" type="text" required="" id="rfc" class="form-control" value="<s:property value="UnCliente.rfc"/>">
                                     </div>      
                                     <div class="form-group">
                                         <label for="nnc">Correo electrónico:</label>

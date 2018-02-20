@@ -15,6 +15,18 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>BBVA Bancomer | Ejecutivo</title>
+        <script type="text/javascript">
+            function validarFormularioCliente() {
+                var sueldo = document.getElementById('saldo').value;
+                if (!isNaN(sueldo) && sueldo > 0) {
+                    return true;
+                } else if (sueldo <= 0) {
+                    alert("El saldo debe ser númerico y mayor a $0 pesos");
+                    return false;
+                }
+            }
+        </script>
+        
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
@@ -147,12 +159,12 @@
                             <div id="mainContent" role="tabpanel" class="tab-pane active">
                                 <h1>Registrar un nueva cuenta</h1>
                                 <br>
-                                <form name="form1" action="<%=context%>/registrarNuevaCuenta"> 
+                                <form name="form1" action="<%=context%>/registrarNuevaCuenta" onsubmit="return validarFormularioCliente()" method="post"> 
                                     <input name="unCliente.idCliente" hidden="" value="<s:property value="unCliente.idCliente"/>"/>
                                     <font color="#0174DF"><h3>Datos de la cuenta Bancomer</h3></font>
                                     <div class="form-group">
                                         <label for="nc">Saldo de apertura:</label>
-                                        <input name="unCliente.cuenta.saldo" type="number" required="" class="form-control">
+                                        <input name="unCliente.cuenta.saldo" type="number" id="saldo" required="" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="nc">Tipo de cuenta Bancomer:</label> 

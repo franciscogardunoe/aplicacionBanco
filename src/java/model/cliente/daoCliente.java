@@ -81,6 +81,7 @@ public class daoCliente {
             resultado = pstm.executeUpdate() == 1;
         } catch (SQLException ex) {
             System.err.println("Excepción SQL: " + ex.getMessage());
+            return true;
         } catch (Exception e) {
             System.err.println("Excepción: " + e.getMessage());
         } finally {

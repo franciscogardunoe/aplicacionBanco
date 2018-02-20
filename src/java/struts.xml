@@ -65,7 +65,11 @@
         <action name="registrarNuevaCuenta" class="control.banco.ControlEjecutivo" method="registrarNuevaCuenta">
             <result name="success">ejecutivo/modificarCliente.jsp</result>
             <result name="error">/error/error.jsp</result>
-        </action>  
+        </action> 
+        <action name="comprobarCorreo" class="control.banco.ControlEjecutivo" method="comprobarCorreo">
+            <result name="success">ejecutivo/registrarCliente.jsp</result>
+            <result name="error">ejecutivo/registrarCliente.jsp</result>
+        </action>   
         <!--TERMINAN ACCIONES PARA EJECUTIVOS-->
         
         

@@ -60,126 +60,37 @@ public class daoUsuario {
         }
         return unUsuario;
     }
-//    public boolean registrarCategoria(BeanCategoria unaCategoria) {
-//        boolean resultado = false;
-//        try {
-//            conexion = ConexionSQL.obtenerConexion();
-//            pstm = conexion.prepareStatement("EXECUTE pa_insertarCategoria ?,?");
-//            pstm.setString(1, unaCategoria.getNombreCategoria());
-//            pstm.setString(2, unaCategoria.getDescripcionCategoria());
-//            resultado = pstm.executeUpdate() == 1;
-//        } catch (SQLException ex) {
-//            System.err.println("Excepción SQL: " + ex.getMessage());
-//        } catch (Exception e) {
-//            System.err.println("Excepción: " + e.getMessage());
-//        } finally {
-//            try {
-//                if (conexion != null) {
-//                    conexion.close();
-//                }
-//                if (pstm != null) {
-//                    pstm.close();
-//                }
-//            } catch (Exception exc) {
-//                System.err.println("Excepción: " + exc.getMessage());
-//            }
-//        }
-//        return resultado;
-//    }
+    public boolean consultarCorreo(String correo) {
+        boolean resultado = false;
+        try {
+            conexion = ConexionSQL.obtenerConexion();
+            pstm = conexion.prepareStatement("EXECUTE pa_consultarCorreo ?");
+            pstm.setString(1, correo);
+            rs = pstm.executeQuery();
+            int numero=0;
+            while(rs.next()){
+                numero++;
+            }
+            if(numero>0){
+                resultado=true;
+            }          
+        } catch (SQLException ex) {
+            System.err.println("Excepción SQL: " + ex.getMessage());
+        } catch (Exception e) {
+            System.err.println("Excepción: " + e.getMessage());
+        } finally {
+            try {
+                if (conexion != null) {
+                    conexion.close();
+                }
+                if (pstm != null) {
+                    pstm.close();
+                }
+            } catch (Exception exc) {
+                System.err.println("Excepción: " + exc.getMessage());
+            }
+        }
+        return resultado;
+    }
 
-//    public static void main(String[] args) {
-//        DaoCategoria objD = new DaoCategoria();
-//        List<BeanCategoria> misCategorias;
-//        misCategorias = objD.listarCategorias();
-//        System.out.println("" + misCategorias);
-//    }
-//
-//    public BeanCategoria consultaCategoria(int idCategoria) {
-//        BeanCategoria unaCategoria = new BeanCategoria();
-//        try {
-//            conexion = ConexionSQL.obtenerConexion();
-//            pstm = conexion.prepareStatement("pa_mostrarCategoria ?");
-//            pstm.setInt(1, idCategoria);
-//            rs = pstm.executeQuery();
-//            while (rs.next()) {
-//                unaCategoria.setIdCategoria(rs.getInt("idCategoria"));
-//                unaCategoria.setNombreCategoria(rs.getString("nombreCategoria"));
-//                unaCategoria.setDescripcionCategoria(rs.getString("descripcionCategoria"));
-//            }
-//        } catch (SQLException esql) {
-//            System.out.println("Excepción SQL: " + esql.getMessage());
-//        } catch (Exception e) {
-//            System.out.println("Excepción: " + e.getMessage());
-//        } finally {
-//            try {
-//                if (conexion != null) {
-//                    conexion.close();
-//                }
-//                if (pstm != null) {
-//                    pstm.close();
-//                }
-//            } catch (Exception ex) {
-//                System.out.println("Excepción: " + ex.getMessage());
-//            }
-//        }
-//        return unaCategoria;
-//    }
-//
-//    public boolean modificarCategoria(BeanCategoria categoria) {
-//        boolean modificado = false;
-//        try {
-//            conexion = ConexionSQL.obtenerConexion();
-//            pstm = conexion.prepareStatement("pa_modificarCategoria ?,?,?");
-//            pstm.setInt(1, categoria.getIdCategoria());
-//            pstm.setString(2, categoria.getNombreCategoria());
-//            pstm.setString(3, categoria.getDescripcionCategoria());
-//            modificado = pstm.executeUpdate() == 1;
-//        } catch (SQLException esql) {
-//            modificado = false;
-//            System.err.println("Excepción: " + esql.getMessage());
-//        } catch (Exception e) {
-//            modificado = false;
-//            System.err.println("Excepción: " + e.getMessage());
-//        } finally {
-//            try {
-//                if (conexion != null) {
-//                    conexion.close();
-//                }
-//                if (pstm != null) {
-//                    pstm.close();
-//                }
-//            } catch (Exception ex) {
-//                System.err.println("Excepción: " + ex.getMessage());
-//            }
-//        }
-//        return modificado;
-//    }
-//
-//    public boolean eliminarCategoria(int idCategoria) {
-//        boolean eliminado = false;
-//        try {
-//            conexion = ConexionSQL.obtenerConexion();
-//            pstm = conexion.prepareStatement("pa_eliminarCategoria ?");
-//            pstm.setInt(1, idCategoria);
-//            eliminado = pstm.executeUpdate() == 1;
-//        } catch (SQLException esql) {
-//            eliminado = false;
-//            System.err.println("Excepción: " + esql.getMessage());
-//        } catch (Exception e) {
-//            eliminado = false;
-//            System.err.println("Excepción: " + e.getMessage());
-//        } finally {
-//            try {
-//                if (conexion != null) {
-//                    conexion.close();
-//                }
-//                if (pstm != null) {
-//                    pstm.close();
-//                }
-//            } catch (Exception ex) {
-//                System.err.println("Excepción: " + ex.getMessage());
-//            }
-//        }
-//        return eliminado;
-//    }
 }
